@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<body>
+	<div
+		style="width: 100%; font-size: 36px; line-height: 48px; background-color: navy; color: white">Formular pentru înregistrarea unei noi plăți</div>
+	<h:form id="form">
+		<h:panelGrid columns="2" border="1" id="panouFormMaster">
+			<f:facet name="header">
+				<h:outputText value="Formular plăți"></h:outputText>
+			</f:facet>
+			
+			
+			<h:outputText value="Navigare"></h:outputText>
+
+			<h:panelGrid columns="2" border="1">
+				<h:commandButton id="btnPrevious"
+					actionListener="#{formPlata.prevPlata}" value="Inapoi">
+					<f:ajax render="@form" />
+				</h:commandButton>
+				<h:commandButton id="cmdNext"
+					actionListener="#{formPlata.nextPlata" value="Inainte">
+					<f:ajax render="@form" />
+				</h:commandButton>
+			</h:panelGrid>
+			
+			
+			<h:outputText value="Id plată "></h:outputText>
+			<h:outputText id="idPlata " value="#{form.idPlata()}">
+			</h:outputText>
+			
+			<h:outputText value="Data plății "></h:outputText>
+			<h:inputText value="#{form.dataPlata}">
+				<f:convertDateTime type="date" pattern="yyyy-MM-dd" />
+			</h:inputText>
+			
+
+			<h:outputText value="Furnizor"></h:outputText>
+			<h:selectOneMenu id="cboFurnizori" value="#{formPlata.furnizor.numeFurnizor}">
+				<f:selectItems value="#{formPlata.furnizori}" var="item" itemValue="#{item.idFurnizor}" itemLabel="#{item.numeFurnizor}" />
+			</h:selectOneMenu>
+			
+			
+			<h:outputText value="Sumă "></h:outputText>
+			<h:outputText value="#{formPlata.plata.sumaPlata}">
+				<f:convertNumber pattern="#0.00" />
+			</h:outputText>
+	
+			
+		
+
+
+
+
+			<h:panelGrid border="1" columns="2" id="p3">
+				<h:commandButton id="cmdAdaugare" value="Adauga"
+					actionListener="#{formPlata.adaugarePlata}" />
+				<h:commandButton id="cmdStergere" value="Sterge"
+					actionListener="#{formPlata.stergerePlata}" />
+			</h:panelGrid>
+			
+			<h:panelGrid border="1" columns="2" id="p4">
+				<h:commandButton id="cmdAbandon" value="Abandon"
+					actionListener="#{formPlata.abandonPlata}" />
+				<h:commandButton id="cmdSalvare" value="Salveaza"
+					actionListener="#{formPlata.salvarePlata}" />
+			</h:panelGrid>
+			
+		</h:panelGrid><br />
+		<h:dataTable id="furnizorGrid" border="1"
+			value="#{formPlata.idFurnizor}" var="furnizor">
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Id Furnizor " />
+				</f:facet>
+				<h:outputText id="id" value="#{FurnizorPlata.idPlata}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Nume Furnizor " />
+				</f:facet>
+				<h:inputText id="nume furnizor " value="#{FurnizorPlata.numeFurnizor}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Adresa " />
+				</f:facet>
+				<h:outputText id="adresa" value="#{FurnizorPlata.adresa}">
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Bancă parteneră " />
+				</f:facet>
+				<h:outputText id="bancaPartenera"
+					value="#{FurnizorPlata.bancaPartenera}">
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Sterge" />
+				</f:facet>
+				<h:commandButton id="cmdStergeArticol" value="Sterge"
+					actionListener="#{formPlata.stergeFurnizor}">
+					<f:ajax render="articoleGrid" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+		<h:commandButton id="cmdAdaugaFurnizor" value="Adauga furnizor"
+			actionListener="#{formPlata.adaugaFurnizor}" />
+
+	</h:form>
+
+</body>
+</html>
